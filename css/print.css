@@ -115,3 +115,48 @@
   .d-sec { padding-top: 5mm; }
   .d-sec > h2 { font-size: 16pt; margin-bottom: 3mm; }
 }
+@media print {
+  /* 관점별 PDF: 번호 섹션(01~06)은 새 쪽에서 시작해 되도록 한 쪽 안에 끝낸다. html 글자 크기로 rem 단위를 함께 줄인다 */
+  html.print-full { font-size: 14px; }
+  .print-full body { font-size: 10pt; line-height: 1.5; }
+  .print-full #projects, .print-full #debug, .print-full #build, .print-full #story, .print-full #records, .print-full #contact { break-before: page; }
+  .print-full .section { padding-block: 0; }
+  .print-full .sec-head { margin-bottom: 4mm; }
+  .print-full .sec-head h2 { font-size: 20pt; }
+  .print-full .legend { margin-bottom: 3mm; }
+  /* 01 대표 프로젝트: 2열 카드 */
+  .print-full #scenes { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; }
+  .print-full .scene { margin: 0; padding: 3mm 4mm; break-inside: avoid; }
+  .print-full .scene__title { font-size: 14pt; }
+  .print-full .scene .easy { margin-bottom: 1mm; }
+  .print-full .scene .facts { margin: 1mm 0; gap: 0 3mm; }
+  .print-full .scene .role-line { margin: 0; }
+  .print-full .scene .metrics { grid-template-columns: 1fr 1fr; margin: 2mm 0 0; }
+  .print-full .scene .metrics .metric { padding: 1mm 0 1mm 3mm; gap: 1px; }
+  .print-full .scene .metrics .metric:nth-child(odd) { padding-left: 0; border-left: 0; }
+  .print-full .metric__value { font-size: 13pt; }
+  /* 그 외 프로젝트: 왼쪽 이름·기간, 오른쪽 설명의 한 줄형으로 줄여 대표 프로젝트 쪽에 붙인다 */
+  .print-full .others { grid-template-columns: 1fr; gap: 2mm; margin: 0; }
+  .print-full .other { display: grid; grid-template-columns: 58mm 1fr; column-gap: 4mm; padding: 2.5mm 4mm; }
+  .print-full .other > .label, .print-full .other > h4 { grid-column: 1; margin: 0; }
+  .print-full .other > :not(.label):not(h4) { grid-column: 2; margin: 0; }
+  .print-full .other > p:nth-of-type(2) { grid-row: 1; }
+  .print-full #others-title { margin: 3mm 0 2mm; }
+  .print-full .other { break-inside: avoid; }
+  /* 02 문제 해결 */
+  .print-full .debug { gap: 3mm; }
+  .print-full .dbg { padding: 4mm; grid-template-columns: 54mm 1fr; }
+  .print-full .dbg__res b { font-size: 16pt; }
+  /* 03 AI와 만드는 법: 문서 단계 4열, 원칙 4열 */
+  .print-full .steps, .print-full .principles { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 3mm; }
+  .print-full .steps li, .print-full .principles li { padding: 3mm; }
+  /* 04 스토리 */
+  .print-full .timeline li { padding-bottom: 3mm; max-width: none; }
+  .print-full .timeline h3 { font-size: 11pt; margin-bottom: 1mm; }
+  /* 05 기록: 2열로 되돌리고 날짜 칸만 좁힌다 */
+  .print-full .records { grid-template-columns: 1fr 1fr; gap: 4mm; }
+  .print-full .records > div { padding: 4mm; }
+  .print-full .rows li, .print-full .skills div { grid-template-columns: 19mm 1fr; gap: 2mm; padding: 1mm 0; }
+  /* 06 연락처 */
+  .print-full .contact { margin-top: 0; padding-top: 0; border-top: 0; }
+}
