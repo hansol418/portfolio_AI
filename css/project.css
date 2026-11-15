@@ -32,7 +32,7 @@
 .frame img { width: 100%; aspect-ratio: 16 / 10; object-fit: contain; }
 .gallery--phone .frame img { aspect-ratio: 9 / 19; }
 .gallery figcaption { display: flex; gap: var(--s-1); font-size: var(--fs-14); color: var(--c-muted); }
-.gallery .num { color: var(--c-ink); font-weight: 700; font-variant-numeric: tabular-nums; }
+.gallery .num { color: var(--c-ink); font-weight: 700; font-variant-numeric: tabular-nums; flex: none; }
 
 /* 문제 해결: 장마다 왼쪽 번호, 오른쪽 제목과 단계 */
 .d-ch { display: grid; grid-template-columns: 9rem 1fr; gap: var(--s-3); padding: var(--s-4); margin-bottom: var(--s-3); }

@@ -4,7 +4,7 @@
   :root { --c-ink: #111; --c-text: #111827; --c-muted: #4b5563; --c-line: #d1d5db; --c-surface: #fff; --c-soft: #f3f4f6; }
   /* 도식 색·카드 테두리를 인쇄에도 남긴다. 바탕은 흰색으로 */
   html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  body { font-size: 11pt; line-height: 1.55; background: #fff; }
+  body { font-size: 11pt; line-height: 1.55; background: #fff; word-break: keep-all; overflow-wrap: break-word; }
   .card { box-shadow: none; }
   .sec-head { margin-bottom: 5mm; }
   .sec-head .lead { max-width: none; }
@@ -79,7 +79,7 @@
   .metrics .metric:nth-child(4n+1) { padding-left: 0; border-left: 0; }
   .print-onepager .metrics .metric:nth-child(odd) { padding-left: 0; border-left: 0; }
   /* 도식은 A4 가로로 이어서 보여 준다 */
-  .flow__steps { grid-template-columns: repeat(auto-fit, minmax(28mm, 1fr)); gap: 3mm 6mm; }
+  .flow__steps { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 3mm 5mm; }
   .flow__step + .flow__step::before { content: "→"; left: -5mm; top: 50%; transform: translateY(-50%); font-size: 12pt; }
   .d-sec > h2 { font-size: 18pt; margin-bottom: 4mm; }
   .d-head h1 { font-size: 26pt; }
@@ -88,4 +88,30 @@
 @media print {
   /* 섹션 번호와 제목이 쪽 경계에서 갈라지지 않게 */
   .d-sec > h2, .sec-head { break-inside: avoid; break-after: avoid; }
+}
+@media print {
+  /* 화면용 음수 여백 때문에 배지 설명이 머리말 문장 위로 겹치던 것을 막는다 */
+  .legend { margin: 0 0 4mm; }
+  /* 문제 해결 카드: 3열은 A4에서 너무 좁아 길어지고 잘리므로 한 줄에 하나, 요약 왼쪽·단계 오른쪽 */
+  .debug { grid-template-columns: 1fr; gap: 4mm; }
+  .dbg { display: grid; grid-template-columns: 58mm 1fr; column-gap: 6mm; align-items: start; break-inside: avoid; }
+  .dbg > :not(.dbg__steps) { grid-column: 1; }
+  .dbg__steps { grid-column: 2; grid-row: 1 / span 4; }
+  .dbg__steps li:first-child { border-top: 0; padding-top: 0; }
+  /* 문서 단계·원칙: 카드가 쪽 경계에서 갈라지지 않게 */
+  .steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .steps li, .principles li { break-inside: avoid; }
+  /* 접히는 '실제로 적용한 곳'은 인쇄에서 숨겨지므로 제목도 함께 뺀다 */
+  .sub:has(+ details.more) { display: none; }
+  h3, .sub { break-after: avoid; }
+  /* 기록: 반쪽 칸은 A4에서 글자가 세로로 쌓이므로 한 칸씩, 줄 단위로만 넘긴다 */
+  .records { grid-template-columns: 1fr; gap: 4mm; }
+  .rows li, .skills div { grid-template-columns: 34mm 1fr; break-inside: avoid; }
+  .records > div { break-inside: avoid; }
+  /* 상세 페이지: 화면 모음(길어서 어차피 넘어감)을 뺀 카드는 통째로 넘긴다 */
+  .d-card:not(:has(.gallery)) { break-inside: avoid; }
+  /* 끝의 화면용 아래 여백이 빈 쪽을 만들고, 섹션 간격이 커서 카드가 한 줄씩 넘치므로 줄인다 */
+  .detail { padding-block: 0; }
+  .d-sec { padding-top: 5mm; }
+  .d-sec > h2 { font-size: 16pt; margin-bottom: 3mm; }
 }
