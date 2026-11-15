@@ -1,0 +1,7 @@
+assets-src/
+*.tmp
+# 기획·인터뷰 문서는 PC에만 둔다(공개 저장소 제외)
+docs/
+Spec.md
+Plan.md
+.claude/

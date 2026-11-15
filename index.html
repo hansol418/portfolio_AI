@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111214" media="(prefers-color-scheme: dark)">
+  <title>이한솔 · AI·AX 포트폴리오</title>
+  <meta name="description" content="현업에 묻고, AI로 풀고, 끝까지 운영합니다. AI·AX·서비스 기획 지원자 이한솔의 포트폴리오.">
+  <script>
+    /* 저장된 테마 → 없으면 시스템 설정. 그리기 전에 적용해 깜빡임을 막는다. */
+    (function () {
+      var saved = null;
+      try { saved = localStorage.getItem("theme"); } catch (e) {}
+      var dark = saved ? saved === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&display=swap">
+  <link rel="stylesheet" href="css/tokens.css?v=20261116k">
+  <link rel="stylesheet" href="css/site.css?v=20261116k">
+  <link rel="stylesheet" href="css/print.css?v=20261116k">
+</head>
+<body>
+  <a class="skip" href="#main">본문으로 건너뛰기</a>
+  <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
+
+  <header class="nav" id="nav">
+    <div class="nav__in">
+      <a class="nav__name" href="#top">이한솔</a>
+      <nav aria-label="섹션">
+        <ul class="nav__links" id="nav-links">
+          <li><a href="#projects">프로젝트</a></li>
+          <li><a href="#debug">문제 해결</a></li>
+          <li><a href="#build">일하는 방식</a></li>
+          <li><a href="#story">성장</a></li>
+          <li><a href="#records">기록</a></li>
+          <li><a href="#contact">연락처</a></li>
+        </ul>
+      </nav>
+      <div class="nav__tools">
+        <button type="button" class="btn btn--ghost" data-open-pdf>PDF</button>
+        <button type="button" class="btn btn--ghost" data-theme-toggle aria-pressed="false">다크 모드</button>
+      </div>
+    </div>
+  </header>
+
+  <nav aria-label="페이지 목차"><ol class="toc" id="toc"></ol></nav>
+  <main id="main">
+    <section class="hero wrap" id="top" aria-labelledby="hero-headline">
+      <div class="roles" role="group" aria-label="어떤 직무로 보시나요?">
+        <p class="label">어떤 직무로 보시나요?</p>
+        <div class="roles__buttons" id="roles"></div>
+        <button type="button" class="btn btn--link" id="role-copy">이 관점 링크 복사</button>
+        <span class="flash" id="copy-flash" role="status" aria-live="polite"></span>
+      </div>
+      <div class="hero__grid">
+        <div>
+          <p class="label">이한솔 · Lee Hansol · AI · AX · 서비스 기획</p>
+          <h1 class="hero__headline" id="hero-headline">현업에 묻고, AI로 풀고, 끝까지 운영합니다.</h1>
+          <p class="hero__sub" id="hero-sub"></p>
+          <p class="hero__intro" id="hero-intro"></p>
+          <ul class="hero__proof" id="hero-proof"></ul>
+          <p class="hero__actions">
+            <a class="btn" href="#projects">프로젝트 보기</a>
+            <a class="btn btn--ghost" id="hero-onepager" href="pdf/onepager-all.pdf" download>원페이저 PDF</a>
+            <button type="button" class="btn btn--link" data-open-pdf>PDF 모두 보기</button>
+          </p>
+        </div>
+        <img class="hero__photo" src="assets/photo.jpg" alt="이한솔 증명사진" width="240" height="300">
+      </div>
+    </section>
+
+    <section class="wrap section" id="projects" aria-labelledby="projects-title">
+      <header class="sec-head">
+        <div><p class="eyebrow">01 / Projects</p><h2 id="projects-title">대표 프로젝트</h2></div>
+        <p class="lead">무엇을 만들었는지 한 줄로 먼저 보여 주고 역할과 문제 해결은 상세 페이지에 담았습니다.</p>
+      </header>
+      <p class="legend"><span class="badge badge--ok">확인함</span> 실행·기록으로 확인한 값 <span class="badge badge--cond">조건부</span> 평가·가정이 붙은 값 <span class="badge badge--team">팀</span> 팀원 몫이 포함된 값</p>
+      <div id="scenes"></div>
+      <noscript>
+        <ul>
+          <li><a href="project.html?id=noti">NotiGuard</a></li>
+          <li><a href="project.html?id=contest">사내 AI 경진대회 접수·평가 시스템</a></li>
+          <li><a href="project.html?id=veriorder">VeriOrder</a></li>
+          <li><a href="project.html?id=agentpool">AgentPool</a></li>
+          <li><a href="project.html?id=steel">철강 전력수요 예측 · 피크 조기경보</a></li>
+          <li><a href="project.html?id=tw-web">ToolWithMe 웹</a></li>
+          <li><a href="project.html?id=tw-mobile">ToolWithMe 모바일</a></li>
+        </ul>
+      </noscript>
+      <h3 class="sub" id="others-title">그 외 프로젝트</h3>
+      <ul class="others" id="others" aria-labelledby="others-title"></ul>
+    </section>
+
+    <section class="wrap section" id="debug" aria-labelledby="debug-title">
+      <header class="sec-head">
+        <div><p class="eyebrow">02 / Debugging</p><h2 id="debug-title">막혔던 순간, 이렇게 풀었습니다</h2></div>
+        <p class="lead">무슨 일이 → 원인 → 해결 → 결과 순서로 적고 개발을 몰라도 읽히도록 비유를 붙였습니다.</p>
+      </header>
+      <div class="debug" id="debug-list"></div>
+      <details class="more" id="debug-more"><summary>다른 문제 해결 기록 <span id="debug-more-n"></span>개 더 보기</summary><div class="debug" id="debug-rest"></div></details>
+    </section>
+
+    <section class="wrap section" id="build" aria-labelledby="build-title"></section>
+    <section class="wrap section" id="story" aria-labelledby="story-title"></section>
+    <section class="wrap section" id="records" aria-labelledby="records-title"></section>
+
+    <section class="section contact" id="contact" aria-labelledby="contact-title">
+      <div class="wrap">
+        <p class="eyebrow">06 / Contact</p>
+        <h2 id="contact-title">현업의 문제, 가장 먼저 묻고 끝까지 풀겠습니다.</h2>
+        <p class="contact__lead">처음 맡는 일도 배워서 만들고, 쓰이는 데까지 책임지겠습니다.</p>
+        <ul class="contact__list">
+          <li><span class="label">이메일</span> <a href="mailto:hslee4954@gmail.com">hslee4954@gmail.com</a></li>
+          <li><span class="label">GitHub</span> <a href="https://github.com/hansol418">github.com/hansol418</a></li>
+        </ul>
+        <button type="button" class="btn btn--invert" data-open-pdf>직무별 PDF 받기</button>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="lightbox" id="lightbox" aria-label="화면 크게 보기">
+    <figure><img id="lb-img" alt=""><figcaption id="lb-cap"></figcaption></figure>
+    <button type="button" class="lb-btn lb-prev" data-lb="prev" aria-label="이전 화면">‹</button>
+    <button type="button" class="lb-btn lb-next" data-lb="next" aria-label="다음 화면">›</button>
+    <button type="button" class="lb-btn lb-close" data-lb="close" aria-label="닫기">×</button>
+  </dialog>
+  <dialog class="pdf-dialog" id="pdf-dialog" aria-labelledby="pdf-title"></dialog>
+
+  <script src="data/site.js?v=20261116k"></script>
+  <script src="data/projects-company.js?v=20261116k"></script>
+  <script src="data/projects-ls.js?v=20261116k"></script>
+  <script src="data/projects-more.js?v=20261116k"></script>
+  <script src="data/sections.js?v=20261116k"></script>
+  <script src="js/ui.js?v=20261116k"></script>
+  <script src="js/render-sections.js?v=20261116k"></script>
+  <script src="js/render-home.js?v=20261116k"></script>
+</body>
+</html>

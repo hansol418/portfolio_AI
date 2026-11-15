@@ -1,0 +1,83 @@
+/* 디자인 토큰(D58). 글꼴은 Pretendard 하나, 강조색은 중간 남색 하나, 미색 바탕 위 흰 카드. */
+:root {
+  --c-bg: #fbfaf7;
+  --c-surface: #ffffff;
+  --c-ink: #15171a;
+  --c-text: #23262b;
+  --c-muted: #565b63;
+  --c-faint: #6b7078;
+  --c-line: #e4e1da;
+  --c-soft: #f3f1ec;
+  --c-accent: #1e40af;
+  --c-accent-soft: #eef3ff;
+  /* 연락처 띠: 강조색으로 사이트를 마무리한다 */
+  --c-band: #1e40af; --c-on-band: #ffffff; --c-on-band-soft: #c7d2fe;
+  --c-success: #15803d;
+  --c-warning: #b45309;
+  --c-team: #4b5563;
+  --c-focus: #1e40af;
+  /* 도식에서 단계를 맡는 주체 색(글자로도 표시한다) */
+  --c-human: #1e40af; --c-human-bg: #eff4ff;
+  --c-ai: #6d28d9; --c-ai-bg: #f4efff;
+  --c-sys: #0f766e; --c-sys-bg: #ecfbf7;
+  --c-result: #b45309; --c-result-bg: #fff7eb;
+
+  --f-sans: "Pretendard Variable", Pretendard, "Malgun Gothic", "Apple SD Gothic Neo", system-ui, sans-serif;
+  /* 제목도 본문과 같은 Pretendard. 이름만 남겨 기존 규칙이 그대로 쓰게 한다. */
+  --f-serif: var(--f-sans);
+  /* 섹션 번호 같은 영문·숫자 라벨에만 쓴다. 한글은 Pretendard로 떨어진다. */
+  --f-mono: "JetBrains Mono", "Pretendard Variable", Pretendard, monospace;
+
+  /* 크기는 다섯 단계로: 첫 화면 / 섹션 제목 / 프로젝트 이름 / 본문 / 라벨 */
+  --fs-hero: clamp(2.4rem, 1.4rem + 3.6vw, 4.2rem);
+  --fs-h2: clamp(2rem, 1.5rem + 1.6vw, 2.625rem);
+  --fs-40: clamp(1.75rem, 1.4rem + 1.2vw, 2.125rem);
+  --fs-32: 2rem;
+  --fs-24: 1.375rem;
+  --fs-18: 1.125rem;
+  --fs-16: 1.0625rem;
+  --fs-14: 0.875rem;
+  --fs-13: 0.8125rem;
+
+  --s-1: 8px;
+  --s-2: 16px;
+  --s-3: 24px;
+  --s-4: 32px;
+  --s-5: 40px;
+  --s-6: 48px;
+  --s-8: 64px;
+  --s-12: 96px;
+  --s-section: 132px;
+
+  --w-page: 1120px;
+  --w-read: 42rem;
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 16px;
+  --shadow-card: 0 1px 2px rgb(21 23 26 / 0.04);
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --c-bg: #111214;
+  --c-surface: #1a1c20;
+  --c-ink: #f3f3f3;
+  --c-text: #e5e6e9;
+  --c-muted: #a6abb3;
+  --c-faint: #8d929a;
+  --c-line: #2e3137;
+  --c-soft: #22252a;
+  --c-accent: #8fb0ff;
+  --c-accent-soft: #1a2440;
+  --c-band: #1e3a8a; --c-on-band: #ffffff; --c-on-band-soft: #c7d2fe;
+  --c-success: #4ade80;
+  --c-warning: #fbbf24;
+  --c-team: #c3c7ce;
+  --c-focus: #8fb0ff;
+  --c-human: #93b4ff; --c-human-bg: #16203a;
+  --c-ai: #c4a8ff; --c-ai-bg: #221a36;
+  --c-sys: #5eead4; --c-sys-bg: #0f2a27;
+  --c-result: #fbbf24; --c-result-bg: #2b2113;
+  --shadow-card: none;
+  color-scheme: dark;
+}

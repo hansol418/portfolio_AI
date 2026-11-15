@@ -1,0 +1,91 @@
+/* 인쇄·PDF용. tools/make-pdf.ps1이 ?print=onepager|full 로 열어 Chrome으로 PDF를 만든다. */
+@media print {
+  @page { size: A4; margin: 14mm 12mm; }
+  :root { --c-ink: #111; --c-text: #111827; --c-muted: #4b5563; --c-line: #d1d5db; --c-surface: #fff; --c-soft: #f3f4f6; }
+  /* 도식 색·카드 테두리를 인쇄에도 남긴다. 바탕은 흰색으로 */
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-size: 11pt; line-height: 1.55; background: #fff; }
+  .card { box-shadow: none; }
+  .sec-head { margin-bottom: 5mm; }
+  .sec-head .lead { max-width: none; }
+  .nav, .progress, .skip, .roles, .hero__actions, .scene__actions, .peek, .more, dialog, .contact .btn, .d-next, #project-pdf, .toc { display: none !important; }
+  .section { padding-block: 10mm 4mm; }
+  .scene, .dbg, .other, .principles li, .timeline li, .shot { break-inside: avoid; }
+  h2 { break-after: avoid; }
+  a { text-decoration: none; }
+  .contact { background: none; color: var(--c-text); border-top: 2px solid var(--c-accent); margin-top: 8mm; padding-block: 6mm 0; }
+  .contact h2, .contact a { color: var(--c-ink); }
+  .contact .eyebrow { color: var(--c-accent); }
+  .contact__list li { border-color: var(--c-line); }
+  .metric__value { font-size: 20pt; }
+  .scene__title { font-size: 20pt; }
+  .hero { padding-top: 0; }
+  .hero__headline { font-size: 26pt; }
+  .hero__photo { width: 32mm; order: 0; }
+  .hero__grid { grid-template-columns: 1fr 32mm; gap: 8mm; }
+  /* A4 폭이 화면 900px 미만 규칙에 걸리므로 인쇄용 열 구성을 다시 잡는다. */
+  .metrics { grid-template-columns: repeat(4, 1fr); }
+  .debug { grid-template-columns: repeat(3, 1fr); }
+  .records { grid-template-columns: 1fr 1fr; }
+  .label, .facts dt, .easy b, .d-solve dt, .skills dt, .step__n { font-family: var(--f-sans); letter-spacing: 0; }
+  .gallery { grid-template-columns: repeat(2, 1fr); gap: 5mm; }
+  .gallery--phone { grid-template-columns: repeat(4, 1fr); }
+  .gallery li, .d-ch { break-inside: avoid; }
+  .d-ch { grid-template-columns: 22mm 1fr; }
+  .d-steps div { grid-template-columns: 18mm 1fr; }
+  .d-sec { padding-top: 7mm; }
+  .d-role li { grid-template-columns: 22mm 1fr; gap: 3mm; }
+
+  /* 원페이저: 첫 화면 + 프로젝트 요약 + 연락처만 한 장에 */
+  .print-onepager #debug, .print-onepager #build, .print-onepager #story, .print-onepager #records,
+  .print-onepager .lead, .print-onepager .legend, .print-onepager .hero__proof, .print-onepager .hero__intro,
+  .print-onepager .role-line, .print-onepager #others-title, .print-onepager #others, .print-onepager .contact h2, .print-onepager .contact__lead { display: none !important; }
+  .print-onepager body { font-size: 9pt; }
+  .print-onepager .hero { padding-bottom: 3mm; }
+  .print-onepager .hero__headline { font-size: 20pt; margin-bottom: 2mm; }
+  .print-onepager .hero__grid { grid-template-columns: 1fr 22mm; }
+  .print-onepager .hero__photo { width: 22mm; }
+  .print-onepager #projects { padding-block: 3mm 0; }
+  .print-onepager #projects h2 { font-size: 13pt; margin-bottom: 2mm; }
+  .print-onepager #scenes { display: grid; grid-template-columns: 1fr 1fr; gap: 0 6mm; }
+  .print-onepager .scene { padding: 2.5mm 3.5mm; margin: 0 0 3mm; }
+  .print-onepager .sec-head { margin-bottom: 2mm; }
+  /* 새 디자인의 큰 글자·카드 여백을 한 장에 맞게 줄인다 */
+  .print-onepager .hero__sub { font-size: 10pt; line-height: 1.5; margin-bottom: 0; }
+  .print-onepager .hero__grid { gap: 5mm; }
+  .print-onepager .eyebrow { margin-bottom: 1mm; font-size: 8pt; }
+  .print-onepager #scenes { gap: 0 5mm; }
+  .print-onepager .scene { padding: 2mm 3mm; margin: 0 0 2.5mm; }
+  .print-onepager .facts { gap: 0 3mm; font-size: 7.5pt; line-height: 1.4; }
+  .print-onepager .easy { line-height: 1.4; }
+  .print-onepager .contact { margin-top: 2mm; }
+  .print-onepager .scene > .label { display: none; }
+  .print-onepager .badge { padding: 1px 3px; font-size: 7pt; }
+  .print-onepager .scene__title { font-size: 12pt; margin-bottom: 1mm; }
+  .print-onepager .easy { font-size: 8.5pt; margin-bottom: 1mm; }
+  .print-onepager .facts { margin: 0; gap: 3mm; font-size: 8pt; }
+  .print-onepager .metrics { grid-template-columns: 1fr 1fr; margin: 1mm 0 0; }
+  .print-onepager .metric:nth-child(n + 3) { display: none; }
+  .print-onepager .metric { padding: 1mm 1mm 1mm 0; gap: 1px; }
+  .print-onepager .metric__value { font-size: 11pt; }
+  .print-onepager .metric__label { font-size: 7.5pt; }
+  .print-onepager .contact { padding-block: 3mm 0; }
+  .print-onepager .contact__list { display: flex; gap: 6mm; margin: 0; }
+  .print-onepager .contact__list li { border: 0; padding: 0; }
+}
+@media print {
+  /* 숫자 칸: 4칸마다 줄 첫 칸만 세로선을 뺀다(화면의 좁은 폭 규칙을 덮어쓴다) */
+  .metrics .metric { padding-left: 3mm; border-left: 1px solid var(--c-line); }
+  .metrics .metric:nth-child(4n+1) { padding-left: 0; border-left: 0; }
+  .print-onepager .metrics .metric:nth-child(odd) { padding-left: 0; border-left: 0; }
+  /* 도식은 A4 가로로 이어서 보여 준다 */
+  .flow__steps { grid-template-columns: repeat(auto-fit, minmax(28mm, 1fr)); gap: 3mm 6mm; }
+  .flow__step + .flow__step::before { content: "→"; left: -5mm; top: 50%; transform: translateY(-50%); font-size: 12pt; }
+  .d-sec > h2 { font-size: 18pt; margin-bottom: 4mm; }
+  .d-head h1 { font-size: 26pt; }
+  .d-card, .d-ch { padding: 5mm; }
+}
+@media print {
+  /* 섹션 번호와 제목이 쪽 경계에서 갈라지지 않게 */
+  .d-sec > h2, .sec-head { break-inside: avoid; break-after: avoid; }
+}

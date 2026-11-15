@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111214" media="(prefers-color-scheme: dark)">
+  <title>프로젝트 · 이한솔 포트폴리오</title>
+  <script>
+    (function () {
+      var saved = null;
+      try { saved = localStorage.getItem("theme"); } catch (e) {}
+      var dark = saved ? saved === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&display=swap">
+  <link rel="stylesheet" href="css/tokens.css?v=20261116k">
+  <link rel="stylesheet" href="css/site.css?v=20261116k">
+  <link rel="stylesheet" href="css/project.css?v=20261116k">
+  <link rel="stylesheet" href="css/print.css?v=20261116k">
+</head>
+<body>
+  <a class="skip" href="#main">본문으로 건너뛰기</a>
+  <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
+  <header class="nav" id="nav">
+    <div class="nav__in">
+      <a class="nav__name" href="./">이한솔</a>
+      <a class="more-link" href="./#projects">← 모든 프로젝트</a>
+      <ul class="nav__links" id="nav-links" hidden></ul>
+      <div class="nav__tools">
+        <a class="btn btn--ghost" id="project-pdf" href="#" download>이 프로젝트 PDF</a>
+        <button type="button" class="btn btn--ghost" data-theme-toggle aria-pressed="false">다크 모드</button>
+      </div>
+    </div>
+  </header>
+  <main id="main" class="wrap detail">
+    <p id="detail-missing" hidden>찾는 프로젝트가 없습니다. <a href="./#projects">프로젝트 목록으로 돌아가기</a></p>
+    <article id="detail"></article>
+  </main>
+  <dialog class="lightbox" id="lightbox" aria-label="화면 크게 보기">
+    <figure><img id="lb-img" alt=""><figcaption id="lb-cap"></figcaption></figure>
+    <button type="button" class="lb-btn lb-prev" data-lb="prev" aria-label="이전 화면">‹</button>
+    <button type="button" class="lb-btn lb-next" data-lb="next" aria-label="다음 화면">›</button>
+    <button type="button" class="lb-btn lb-close" data-lb="close" aria-label="닫기">×</button>
+  </dialog>
+  <script src="data/site.js?v=20261116k"></script>
+  <script src="data/projects-company.js?v=20261116k"></script>
+  <script src="data/projects-ls.js?v=20261116k"></script>
+  <script src="data/projects-more.js?v=20261116k"></script>
+  <script src="data/sections.js?v=20261116k"></script>
+  <script src="js/ui.js?v=20261116k"></script>
+  <script src="js/render-project.js?v=20261116k"></script>
+</body>
+</html>
