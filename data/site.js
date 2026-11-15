@@ -3,7 +3,7 @@ window.PORTFOLIO = {
   site: {
     name: "이한솔",
     nameEn: "Lee Hansol",
-    url: "https://hansol418.github.io/portfolio-2026/",
+    url: "https://hansol418.github.io/portfolio_AI/",
     email: "hslee4954@gmail.com",
     github: "https://github.com/hansol418",
     photo: "assets/photo.jpg",
