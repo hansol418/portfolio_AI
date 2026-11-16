@@ -1,4 +1,4 @@
-# 사이트용 PDF 11개를 만든다: 전체 원페이저 1, 관점별 3, 프로젝트별 7.
+# 사이트용 PDF 12개를 만든다: 전체 원페이저 1, 관점별 4(전체 포함), 프로젝트별 7.
 # 미리 로컬 서버를 켠다: py -3.11 -m http.server 5173 (저장소 루트에서)
 # 실행: powershell -ExecutionPolicy Bypass -File tools/make-pdf.ps1
 param([string]$Base = "http://localhost:5173")
@@ -16,7 +16,7 @@ catch { throw "로컬 서버($Base)에 연결하지 못했습니다. 저장소 �
 
 New-Item -ItemType Directory -Force $out | Out-Null
 $jobs = [ordered]@{ "onepager-all.pdf" = "index.html?role=all&print=onepager" }
-foreach ($r in "ax", "data", "sw") { $jobs["role-$r.pdf"] = "index.html?role=$r&print=full" }
+foreach ($r in "all", "ax", "data", "sw") { $jobs["role-$r.pdf"] = "index.html?role=$r&print=full" }
 foreach ($p in "noti", "contest", "veriorder", "agentpool", "steel", "tw-web", "tw-mobile") { $jobs["project-$p.pdf"] = "project.html?id=$p&print=1" }
 
 $profile = Join-Path $env:TEMP "portfolio-pdf-profile"

@@ -3,7 +3,7 @@
   const P = window.PORTFOLIO;
   const { $, esc, badge, copyText, flash, openLightbox, countUp } = window.UI;
   const byId = (id) => P.projects.find((p) => p.id === id);
-  const pdfFor = { role: (r) => (r.id === "all" ? "pdf/onepager-all.pdf" : `pdf/role-${r.id}.pdf`), project: (id) => `pdf/project-${id}.pdf` };
+  const pdfFor = { role: (r) => `pdf/role-${r.id}.pdf`, onepager: "pdf/onepager-all.pdf", project: (id) => `pdf/project-${id}.pdf` };
   const roleLink = (r) => P.site.url + (r.id === "all" ? "" : `?role=${r.id}`);
   let currentRole = P.roles[0];
 
@@ -91,13 +91,14 @@
 
   function renderPdfDialog() {
     const roleRows = P.roles.map((r) => `<li class="dl__row${r === currentRole ? " is-current" : ""}">
-      <span>${esc(r.id === "all" ? "전체 원페이저" : `${r.label} 관점`)}${r === currentRole ? ' <span class="label">지금 보는 관점</span>' : ""}</span>
+      <span>${esc(`${r.label} 관점`)}${r === currentRole ? ' <span class="label">지금 보는 관점</span>' : ""}</span>
       <a href="${pdfFor.role(r)}" download>PDF</a>
       <button type="button" class="btn btn--link" data-copy="${esc(roleLink(r))}">링크 복사</button></li>`).join("");
     const projectRows = P.projects.filter((p) => p.tier === "featured").map((p) => `<li class="dl__row">
       <span>${esc(p.name)}</span><a href="${pdfFor.project(p.id)}" download>PDF</a></li>`).join("");
     $("#pdf-dialog").innerHTML = `<h2 id="pdf-title">PDF 받기</h2>
-      <h3 class="label">관점별</h3><ul class="dl">${roleRows}</ul>
+      <h3 class="label">관점별</h3><ul class="dl">${roleRows}
+        <li class="dl__row"><span>전체 원페이저 (1쪽 요약)</span><a href="${pdfFor.onepager}" download>PDF</a></li></ul>
       <h3 class="label">프로젝트별</h3><ul class="dl">${projectRows}</ul>
       <span class="flash" id="dl-flash" role="status" aria-live="polite"></span>
       <form method="dialog"><button class="btn">닫기</button></form>`;
@@ -109,7 +110,7 @@
     $("#hero-proof").innerHTML = currentRole.proof.map((x) => `<li>${esc(x)}</li>`).join("");
     document.querySelectorAll("#roles button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.role === currentRole.id)));
     const onepager = $("#hero-onepager");
-    onepager.href = pdfFor.role(currentRole);
+    onepager.href = currentRole.id === "all" ? pdfFor.onepager : pdfFor.role(currentRole);
     onepager.textContent = currentRole.id === "all" ? "원페이저 PDF" : `${currentRole.label} PDF`;
     renderScenes(currentRole);
     renderToc(currentRole);

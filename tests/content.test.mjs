@@ -99,3 +99,9 @@ test("사이트 파일에 전화번호와 '인턴'이 없다", () => {
     assert.doesNotMatch(text, /인턴/, `${file} '인턴'`);
   }
 });
+
+test("PDF 받기 목록의 파일이 모두 있다(관점 4개 전체 판, 원페이저, 대표 프로젝트)", () => {
+  const files = [...P.roles.map((r) => `pdf/role-${r.id}.pdf`), "pdf/onepager-all.pdf",
+    ...P.projects.filter((p) => p.tier === "featured").map((p) => `pdf/project-${p.id}.pdf`)];
+  for (const f of files) assert.ok(existsSync(join(ROOT, f)), `${f} 없음: tools/make-pdf.ps1로 만든다`);
+});
