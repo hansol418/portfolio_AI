@@ -150,7 +150,11 @@
   .print-full .scene:last-child:nth-child(odd) .metrics .metric { padding-left: 3mm; border-left: 1px solid var(--c-line); }
   .print-full .scene:last-child:nth-child(odd) .metrics .metric:first-child { padding-left: 0; border-left: 0; }
   /* 그 외 프로젝트: 왼쪽 이름·기간, 오른쪽 설명의 한 줄형으로 줄여 대표 프로젝트 쪽에 붙인다 */
-  .print-full .others { grid-template-columns: 1fr; gap: 2mm; margin: 0; }
+  /* 격자 대신 블록으로 쌓는다: 격자 안 항목은 Chrome 인쇄에서 남은 공간이 있어도 다음 쪽으로 밀리는 일이 있다 */
+  .print-full .others { display: block; margin: 0; }
+  .print-full .other + .other { margin-top: 2mm; }
+  /* 화면용 터치 높이(44px)가 인쇄에서는 보이지 않는 빈칸이 되므로 없앤다 */
+  .print-full .other .more-link { min-height: 0; }
   .print-full .other { display: grid; grid-template-columns: 58mm 1fr; column-gap: 4mm; padding: 2.5mm 4mm; }
   .print-full .other > .label, .print-full .other > h4 { grid-column: 1; margin: 0; }
   .print-full .other > :not(.label):not(h4) { grid-column: 2; margin: 0; }
@@ -185,4 +189,19 @@
   .print-full .hero__intro { font-size: 11pt; }
   .print-full .hero__proof { font-size: 11pt; margin-top: 8mm; padding-top: 2mm; border-top: 2px solid var(--c-accent); }
   .print-full .hero__proof li { padding-block: 3mm; }
+}
+@media print {
+  /* 전체 관점(대표 카드 7개)은 내용이 가장 많아 01·02 섹션이 한 줄씩 다음 쪽으로 넘치므로 이 경우에만 더 조인다 */
+  html.print-full:has(#scenes > .scene:nth-child(7)) #scenes { gap: 2.5mm; }
+  html.print-full:has(#scenes > .scene:nth-child(7)) .scene { padding: 2.5mm 3.5mm; }
+  html.print-full:has(#scenes > .scene:nth-child(7)) .other { padding: 1.5mm 3.5mm; }
+  html.print-full:has(#scenes > .scene:nth-child(7)) .other + .other { margin-top: 1.5mm; }
+  html.print-full:has(#scenes > .scene:nth-child(7)) #others-title { margin: 2mm 0 1.5mm; }
+  html.print-full:has(#scenes > .scene:nth-child(7)) .other { font-size: 8.5pt; line-height: 1.35; }
+  html.print-full:has(#scenes > .scene:nth-child(7)) .scene .metrics .metric { padding-block: 0.6mm; }
+  html.print-full:has(#scenes > .scene:nth-child(7)) .metric__value { font-size: 12pt; }
+  html.print-full:has(#scenes > .scene:nth-child(7)) .dbg { padding: 3mm 4mm; grid-template-columns: 46mm 1fr; }
+  html.print-full:has(#scenes > .scene:nth-child(7)) .dbg__steps { font-size: 8.5pt; line-height: 1.4; }
+  html.print-full:has(#scenes > .scene:nth-child(7)) .dbg__steps li { padding: 0.8mm 0; }
+  html.print-full:has(#scenes > .scene:nth-child(7)) .dbg .easy { font-size: 8.5pt; line-height: 1.4; }
 }
