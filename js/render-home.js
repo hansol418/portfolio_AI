@@ -1,48 +1,40 @@
 // 첫 화면: 관점 전환, 프로젝트 장면, 그 외 프로젝트, 문제 해결, PDF 창
 (() => {
   const P = window.PORTFOLIO;
-  const { $, esc, badge, copyText, flash, openLightbox, countUp } = window.UI;
+  const { $, esc, copyText, flash, countUp } = window.UI;
   const byId = (id) => P.projects.find((p) => p.id === id);
   const pdfFor = { role: (r) => `pdf/role-${r.id}.pdf`, onepager: "pdf/onepager-all.pdf", project: (id) => `pdf/project-${id}.pdf` };
   const roleLink = (r) => P.site.url + (r.id === "all" ? "" : `?role=${r.id}`);
   let currentRole = P.roles[0];
+  // 상세 페이지에서 돌아오거나 다음 프로젝트로 넘어가도 고른 관점이 유지되게 주소에 함께 넘긴다
+  const detailHref = (id) => `project.html?id=${esc(id)}${currentRole.id === "all" ? "" : `&role=${currentRole.id}`}`;
 
+  // 카드에는 숫자 두 칸만 두고 나머지는 상세 페이지에서 보여 준다
   function metricsHTML(metrics) {
-    return `<ul class="metrics">${metrics.slice(0, 4).map((m) => `
+    return `<ul class="metrics">${metrics.slice(0, 2).map((m) => `
       <li class="metric"${m.note ? ` title="${esc(m.note)}"` : ""}>
         <span class="metric__value" data-count>${esc(m.value)}</span>
-        <span class="metric__label">${esc(m.label)}</span>${badge(m.badge)}
+        <span class="metric__label">${esc(m.label)}</span>
       </li>`).join("")}</ul>`;
-  }
-
-  function peekHTML(p) {
-    const peeks = p.shots.map((s, i) => ({ s, i })).filter((x) => x.s.peek).slice(0, 3);
-    if (!peeks.length) return "";
-    return `<details class="peek"><summary>빠르게 보기</summary><ol class="peek__grid">${peeks.map(({ s, i }) => `
-      <li><button type="button" class="shot" data-project="${esc(p.id)}" data-shot="${i}">
-        <img src="${esc(s.src)}" alt="${esc(s.alt)}" loading="lazy"><span>${esc(s.caption)}</span></button></li>`).join("")}
-      </ol><a class="more-link" href="project.html?id=${esc(p.id)}#shots">화면 ${p.shots.length}장 모두 보기 →</a></details>`;
   }
 
   function actionsHTML(p) {
     if (p.tier !== "featured") {
       return p.links.map((l) => `<a class="more-link" href="${esc(l.url)}">${esc(l.label)} ↗</a>`).join(" ");
     }
-    return `<a class="more-link" href="project.html?id=${esc(p.id)}">프로젝트 전체 보기 →</a>
-      <a class="more-link" href="${pdfFor.project(p.id)}" download>이 프로젝트 PDF</a>`;
+    return `<a class="more-link" href="${detailHref(p.id)}">프로젝트 전체 보기 →</a>`;
   }
 
   function sceneHTML(p, n) {
-    const title = p.tier === "featured" ? `<a href="project.html?id=${esc(p.id)}">${esc(p.name)}</a>` : esc(p.name);
+    const title = p.tier === "featured" ? `<a href="${detailHref(p.id)}">${esc(p.name)}</a>` : esc(p.name);
     return `<article class="scene card" id="ps-${esc(p.id)}">
-      <p class="label">Project ${String(n).padStart(2, "0")} · ${esc(p.kind)}</p>
+      <p class="label">Project ${String(n).padStart(2, "0")}, ${esc(p.kind)}</p>
       <h3 class="scene__title">${title}</h3>
       <p class="easy">${esc(p.easy)}</p>
       <dl class="facts"><div><dt>기간</dt><dd>${esc(p.period)}</dd></div><div><dt>팀</dt><dd>${esc(p.team)}</dd></div><div><dt>내 기여</dt><dd>${esc(p.contribution)}</dd></div></dl>
       <p class="role-line"><span class="label">맡은 일</span> ${esc(p.roleLine)}</p>
       ${metricsHTML(p.metrics)}
       <p class="scene__actions">${actionsHTML(p)}</p>
-      ${peekHTML(p)}
     </article>`;
   }
 
@@ -65,7 +57,7 @@
     const shown = new Set(role.order);
     $("#others").innerHTML = P.others.map((o) => (o.projectId ? { ...byId(o.projectId), id: o.projectId } : o))
       .filter((o) => !shown.has(o.id))
-      .map((o) => `<li class="other card"><p class="label">${esc(o.period)} · ${esc(o.kind)}</p>
+      .map((o) => `<li class="other card"><p class="label">${esc(o.period)}, ${esc(o.kind)}</p>
         <h4>${esc(o.name)}</h4><p>${esc(o.easy)}</p>
         <p class="muted">${esc(o.result || o.roleLine || "")}</p>
         ${(o.links || []).map((l) => `<a class="more-link" href="${esc(l.url)}">${esc(l.label)} ↗</a>`).join(" ")}</li>`).join("");
@@ -76,7 +68,6 @@
     return `<article class="dbg card"><p class="label">${esc(byId(d.project).name)}</p>
       <h3 class="dbg__title">${esc(d.title)}</h3>
       <p class="dbg__res"><b>${esc(d.result.value)}</b> <span>${esc(d.result.label)}</span></p>
-      <p class="easy"><b>쉽게 말하면</b> ${esc(d.easy)}</p>
       <ol class="dbg__steps">${d.steps.map((s, i) => `<li><span class="label">${names[i]}</span>${esc(s)}</li>`).join("")}</ol></article>`;
   }
 
@@ -107,6 +98,7 @@
   function setRole(id, push) {
     currentRole = P.roles.find((r) => r.id === id) || P.roles[0];
     $("#hero-intro").textContent = currentRole.intro;
+    $("#hero-label").textContent = `이한솔 Lee Hansol / ${currentRole.id === "all" ? "AI, AX, 서비스 기획" : currentRole.label}`;
     $("#hero-proof").innerHTML = currentRole.proof.map((x) => `<li>${esc(x)}</li>`).join("");
     document.querySelectorAll("#roles button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.role === currentRole.id)));
     const onepager = $("#hero-onepager");
@@ -127,8 +119,6 @@
       flash($("#copy-flash"), (await copyText(link)) ? "링크를 복사했습니다" : `복사가 막혀 있습니다: ${link}`);
     });
     document.addEventListener("click", async (e) => {
-      const shotBtn = e.target.closest(".shot[data-project]");
-      if (shotBtn) openLightbox(byId(shotBtn.dataset.project).shots, Number(shotBtn.dataset.shot));
       if (e.target.closest("[data-open-pdf]")) $("#pdf-dialog").showModal();
       const copyBtn = e.target.closest("[data-copy]");
       if (copyBtn) flash($("#dl-flash"), (await copyText(copyBtn.dataset.copy)) ? "링크를 복사했습니다" : copyBtn.dataset.copy);

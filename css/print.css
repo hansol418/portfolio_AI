@@ -8,9 +8,11 @@
   .card { box-shadow: none; }
   .sec-head { margin-bottom: 5mm; }
   .sec-head .lead { max-width: none; }
-  .nav, .progress, .skip, .roles, .hero__actions, .scene__actions, .peek, .more, dialog, .contact .btn, .d-next, #project-pdf, .toc { display: none !important; }
+  .nav, .progress, .skip, .roles, .hero__actions, .scene__actions, .more, dialog, .contact .btn, .d-next, #project-pdf, .toc { display: none !important; }
   .section { padding-block: 10mm 4mm; }
-  .scene, .dbg, .other, .principles li, .timeline li, .shot { break-inside: avoid; }
+  .scene, .dbg, .other, .timeline li, .shot, .steps li { break-inside: avoid; }
+  /* 문서 단계 8개는 인쇄에서 한 줄에 4개 */
+  .steps { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   h2 { break-after: avoid; }
   a { text-decoration: none; }
   .contact { background: none; color: var(--c-text); border-top: 2px solid var(--c-accent); margin-top: 8mm; padding-block: 6mm 0; }
@@ -27,7 +29,7 @@
   .metrics { grid-template-columns: repeat(4, 1fr); }
   .debug { grid-template-columns: repeat(3, 1fr); }
   .records { grid-template-columns: 1fr 1fr; }
-  .label, .facts dt, .easy b, .d-solve dt, .skills dt, .step__n { font-family: var(--f-sans); letter-spacing: 0; }
+  .label, .facts dt, .d-solve dt, .skills dt { font-family: var(--f-sans); letter-spacing: 0; }
   .gallery { grid-template-columns: repeat(2, 1fr); gap: 5mm; }
   .gallery--phone { grid-template-columns: repeat(4, 1fr); }
   .gallery li, .d-ch { break-inside: avoid; }
@@ -38,8 +40,8 @@
 
   /* 원페이저: 첫 화면 + 프로젝트 요약 + 연락처만 한 장에 */
   .print-onepager #debug, .print-onepager #build, .print-onepager #story, .print-onepager #records,
-  .print-onepager .lead, .print-onepager .legend, .print-onepager .hero__proof, .print-onepager .hero__intro,
-  .print-onepager .role-line, .print-onepager #others-title, .print-onepager #others, .print-onepager .contact h2, .print-onepager .contact__lead { display: none !important; }
+  .print-onepager .lead, .print-onepager .hero__proof, .print-onepager .hero__intro,
+  .print-onepager .role-line, .print-onepager #others-title, .print-onepager #others, .print-onepager .contact h2 { display: none !important; }
   .print-onepager body { font-size: 9pt; }
   .print-onepager .hero { padding-bottom: 3mm; }
   .print-onepager .hero__headline { font-size: 20pt; margin-bottom: 2mm; }
@@ -60,7 +62,6 @@
   .print-onepager .easy { line-height: 1.4; }
   .print-onepager .contact { margin-top: 2mm; }
   .print-onepager .scene > .label { display: none; }
-  .print-onepager .badge { padding: 1px 3px; font-size: 7pt; }
   .print-onepager .scene__title { font-size: 12pt; margin-bottom: 1mm; }
   .print-onepager .easy { font-size: 8.5pt; margin-bottom: 1mm; }
   .print-onepager .facts { margin: 0; gap: 3mm; font-size: 8pt; }
@@ -78,9 +79,11 @@
   .metrics .metric { padding-left: 3mm; border-left: 1px solid var(--c-line); }
   .metrics .metric:nth-child(4n+1) { padding-left: 0; border-left: 0; }
   .print-onepager .metrics .metric:nth-child(odd) { padding-left: 0; border-left: 0; }
-  /* 도식은 A4 가로로 이어서 보여 준다 */
-  .flow__steps { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 3mm 5mm; }
-  .flow__step + .flow__step::before { content: "→"; left: -5mm; top: 50%; transform: translateY(-50%); font-size: 12pt; }
+  /* 흐름 도식은 A4에서도 가로 한 줄로 둔다 */
+  .flow__row { column-gap: 6mm; }
+  .flow__step + .flow__step::before { left: -4.5mm; }
+  .flow__step { font-size: 8.5pt; }
+  .flow__step b { font-size: 9.5pt; }
   .d-sec > h2 { font-size: 18pt; margin-bottom: 4mm; }
   .d-head h1 { font-size: 26pt; }
   .d-card, .d-ch { padding: 5mm; }
@@ -90,19 +93,12 @@
   .d-sec > h2, .sec-head { break-inside: avoid; break-after: avoid; }
 }
 @media print {
-  /* 화면용 음수 여백 때문에 배지 설명이 머리말 문장 위로 겹치던 것을 막는다 */
-  .legend { margin: 0 0 4mm; }
   /* 문제 해결 카드: 3열은 A4에서 너무 좁아 길어지고 잘리므로 한 줄에 하나, 요약 왼쪽·단계 오른쪽 */
   .debug { grid-template-columns: 1fr; gap: 4mm; }
   .dbg { display: grid; grid-template-columns: 58mm 1fr; column-gap: 6mm; align-items: start; break-inside: avoid; }
   .dbg > :not(.dbg__steps) { grid-column: 1; }
   .dbg__steps { grid-column: 2; grid-row: 1 / span 4; }
   .dbg__steps li:first-child { border-top: 0; padding-top: 0; }
-  /* 문서 단계·원칙: 카드가 쪽 경계에서 갈라지지 않게 */
-  .steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .steps li, .principles li { break-inside: avoid; }
-  /* 접히는 '실제로 적용한 곳'은 인쇄에서 숨겨지므로 제목도 함께 뺀다 */
-  .sub:has(+ details.more) { display: none; }
   h3, .sub { break-after: avoid; }
   /* 기록: 반쪽 칸은 A4에서 글자가 세로로 쌓이므로 한 칸씩, 줄 단위로만 넘긴다 */
   .records { grid-template-columns: 1fr; gap: 4mm; }
@@ -119,11 +115,10 @@
   /* 관점별 PDF: 번호 섹션(01~06)은 새 쪽에서 시작해 되도록 한 쪽 안에 끝낸다. html 글자 크기로 rem 단위를 함께 줄인다 */
   html.print-full { font-size: 14px; }
   .print-full body { font-size: 10pt; line-height: 1.5; }
-  .print-full #projects, .print-full #debug, .print-full #build, .print-full #story, .print-full #records, .print-full #contact { break-before: page; }
+  .print-full #projects, .print-full #debug, .print-full #build, .print-full #story, .print-full #records { break-before: page; }
   .print-full .section { padding-block: 0; }
   .print-full .sec-head { margin-bottom: 4mm; }
   .print-full .sec-head h2 { font-size: 20pt; }
-  .print-full .legend { margin-bottom: 3mm; }
   /* 01 대표 프로젝트: 2열 카드 */
   .print-full #scenes { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; }
   .print-full .scene { margin: 0; padding: 3mm 4mm; break-inside: avoid; }
@@ -138,8 +133,6 @@
   /* 인사담당자가 PDF에서 바로 상세 페이지·보고서로 갈 수 있게 카드의 바로가기 줄을 인쇄에도 보인다 */
   .print-full .scene__actions { display: flex !important; gap: 0 5mm; margin-top: 2mm; }
   .print-full .scene__actions .more-link { min-height: 0; font-size: 9.5pt; }
-  /* PDF를 보는 사람에게 또 PDF 받기는 필요 없으므로 상세 페이지 링크만 남긴다 */
-  .print-full .scene__actions a[download] { display: none; }
   /* 바로가기 줄만큼 늘어난 높이를 카드 안 글자 간격으로 되찾는다 */
   .print-full .scene .easy { font-size: 9.5pt; line-height: 1.45; }
   .print-full .scene .facts, .print-full .scene .role-line { font-size: 8.5pt; line-height: 1.4; }
@@ -165,9 +158,6 @@
   .print-full .debug { gap: 3mm; }
   .print-full .dbg { padding: 4mm; grid-template-columns: 54mm 1fr; }
   .print-full .dbg__res b { font-size: 16pt; }
-  /* 03 AI와 만드는 법: 문서 단계 4열, 원칙 4열 */
-  .print-full .steps, .print-full .principles { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 3mm; }
-  .print-full .steps li, .print-full .principles li { padding: 3mm; }
   /* 04 스토리 */
   .print-full .timeline li { padding-bottom: 3mm; max-width: none; }
   .print-full .timeline h3 { font-size: 11pt; margin-bottom: 1mm; }
@@ -176,7 +166,11 @@
   .print-full .records > div { padding: 4mm; }
   .print-full .rows li, .print-full .skills div { grid-template-columns: 19mm 1fr; gap: 2mm; padding: 1mm 0; }
   /* 06 연락처 */
-  .print-full .contact { margin-top: 0; padding-top: 0; border-top: 0; }
+  /* 연락처는 내용이 짧아 새 쪽 대신 기록 쪽 아래에 남색 선으로 구분해 붙인다 */
+  .print-full .contact { margin-top: 6mm; padding-top: 4mm; break-inside: avoid; }
+  .print-full .contact h2 { font-size: 16pt; margin: 0 0 2mm; }
+  .print-full .contact__list { margin: 0; }
+  .print-full .contact__list li { padding-block: 1.5mm; }
 }
 @media print {
   /* 관점 PDF의 표지: 내용이 쪽 위쪽에 몰리지 않게 쪽 높이 안에서 가운데 두고 크게 보여 준다 */
@@ -203,5 +197,4 @@
   html.print-full:has(#scenes > .scene:nth-child(7)) .dbg { padding: 3mm 4mm; grid-template-columns: 46mm 1fr; }
   html.print-full:has(#scenes > .scene:nth-child(7)) .dbg__steps { font-size: 8.5pt; line-height: 1.4; }
   html.print-full:has(#scenes > .scene:nth-child(7)) .dbg__steps li { padding: 0.8mm 0; }
-  html.print-full:has(#scenes > .scene:nth-child(7)) .dbg .easy { font-size: 8.5pt; line-height: 1.4; }
 }

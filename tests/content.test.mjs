@@ -3,7 +3,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync, readdirSync, statSync, existsSync } from "node:fs";
 import { join, extname } from "node:path";
-import { loadPortfolio, ROOT } from "./load-data.mjs";
+import { loadPortfolio, ROOT, DATA_FILES } from "./load-data.mjs";
 
 const P = loadPortfolio();
 const byId = (id) => P.projects.find((p) => p.id === id);
@@ -40,7 +40,7 @@ test("대표 프로젝트마다 접근 도식이 있고 단계마다 맡은 주�
   }
 });
 
-test("숫자마다 배지(확인함·조건부·팀)가 있다", () => {
+test("숫자마다 근거 구분(확인함·조건부·팀)을 데이터에 기록한다", () => {
   for (const p of P.projects) for (const m of p.metrics || []) {
     assert.ok(["확인함", "조건부", "팀"].includes(m.badge), `${p.id} '${m.label}' 배지 없음`);
   }
@@ -104,4 +104,45 @@ test("PDF 받기 목록의 파일이 모두 있다(관점 4개 전체 판, 원�
   const files = [...P.roles.map((r) => `pdf/role-${r.id}.pdf`), "pdf/onepager-all.pdf",
     ...P.projects.filter((p) => p.tier === "featured").map((p) => `pdf/project-${p.id}.pdf`)];
   for (const f of files) assert.ok(existsSync(join(ROOT, f)), `${f} 없음: tools/make-pdf.ps1로 만든다`);
+});
+
+test("문제 해결 카드에 비유 문장(쉽게 말하면)이 없다", () => {
+  for (const d of P.debug) assert.equal(d.easy, undefined, `${d.id}에 비유 문장이 남아 있음`);
+  assert.ok(!readFileSync(join(ROOT, "js/render-home.js"), "utf8").includes("쉽게 말하면"), "render-home.js에 '쉽게 말하면'이 남아 있음");
+});
+
+test("연락처는 다짐 문장 없이 '연락처' 제목만 둔다", () => {
+  const html = readFileSync(join(ROOT, "index.html"), "utf8");
+  assert.match(html, /<h2 id="contact-title">연락처<\/h2>/);
+  assert.ok(!html.includes("contact__lead"), "연락처 아래 문장이 남아 있음");
+});
+
+test("일하는 방식 섹션은 제목과 문서 단계 8개만 두고 도구 이름을 늘어놓지 않는다", () => {
+  const b = P.build;
+  assert.equal(b.title, "문제를 정의하고 AI와 함께 만드는 법");
+  assert.equal(b.steps.length, 8, "문서 단계는 8개");
+  for (const st of b.steps) assert.ok(st.name && st.desc && !st.skill, `${st.name}: 이름·설명만 둔다`);
+  assert.deepEqual(Object.keys(b).sort(), ["steps", "title"], "제목과 단계 외 내용이 남아 있음");
+  const text = JSON.stringify(b);
+  for (const w of ["CLAUDE.md", "grilling", "running-qa", "No Run", "300줄", "하네스"]) assert.ok(!text.includes(w), `'${w}'가 남아 있음`);
+});
+
+test("화면에는 색 배지·범례·빠르게 보기·카드의 PDF 버튼을 두지 않는다", () => {
+  const home = readFileSync(join(ROOT, "js/render-home.js"), "utf8");
+  const detail = readFileSync(join(ROOT, "js/render-project.js"), "utf8");
+  const html = readFileSync(join(ROOT, "index.html"), "utf8");
+  assert.ok(!/badge\(/.test(home + detail), "배지를 그리는 코드가 남아 있음");
+  assert.ok(!html.includes('class="legend"'), "배지 범례가 남아 있음");
+  assert.ok(!home.includes("빠르게 보기"), "빠르게 보기가 남아 있음");
+  assert.ok(!home.includes("이 프로젝트 PDF"), "카드에 PDF 버튼이 남아 있음");
+});
+
+test("사이트 파일에 가운뎃점(·)이 없다", () => {
+  const files = [...DATA_FILES, "index.html", "project.html", ...readdirSync(join(ROOT, "js")).map((f) => `js/${f}`)];
+  for (const f of files) assert.ok(!readFileSync(join(ROOT, f), "utf8").includes("·"), `${f}에 가운뎃점이 남아 있음`);
+});
+
+test("섹션 안내 문장(대표 프로젝트, 막혔던 순간, 스토리)을 두지 않는다", () => {
+  const text = readFileSync(join(ROOT, "index.html"), "utf8") + readFileSync(join(ROOT, "js/render-sections.js"), "utf8");
+  for (const s of ["무엇을 만들었는지 한 줄로", "개발을 몰라도 읽히도록", "배운 것을 직접 배포해 보고"]) assert.ok(!text.includes(s), `'${s}' 문장이 남아 있음`);
 });

@@ -13,14 +13,10 @@
   /* 연락처 띠: 강조색으로 사이트를 마무리한다 */
   --c-band: #1e40af; --c-on-band: #ffffff; --c-on-band-soft: #c7d2fe;
   --c-success: #15803d;
-  --c-warning: #b45309;
-  --c-team: #4b5563;
+  /* 흐름 도식의 담당 글자색: 사람, AI, 시스템 */
+  --c-human: #1e40af; --c-ai: #b91c1c; --c-sys: #0f766e;
   --c-focus: #1e40af;
   /* 도식에서 단계를 맡는 주체 색(글자로도 표시한다) */
-  --c-human: #1e40af; --c-human-bg: #eff4ff;
-  --c-ai: #6d28d9; --c-ai-bg: #f4efff;
-  --c-sys: #0f766e; --c-sys-bg: #ecfbf7;
-  --c-result: #b45309; --c-result-bg: #fff7eb;
 
   --f-sans: "Pretendard Variable", Pretendard, "Malgun Gothic", "Apple SD Gothic Neo", system-ui, sans-serif;
   /* 제목도 본문과 같은 Pretendard. 이름만 남겨 기존 규칙이 그대로 쓰게 한다. */
@@ -71,13 +67,8 @@
   --c-accent-soft: #1a2440;
   --c-band: #1e3a8a; --c-on-band: #ffffff; --c-on-band-soft: #c7d2fe;
   --c-success: #4ade80;
-  --c-warning: #fbbf24;
-  --c-team: #c3c7ce;
+  --c-human: #93b4ff; --c-ai: #fca5a5; --c-sys: #5eead4;
   --c-focus: #8fb0ff;
-  --c-human: #93b4ff; --c-human-bg: #16203a;
-  --c-ai: #c4a8ff; --c-ai-bg: #221a36;
-  --c-sys: #5eead4; --c-sys-bg: #0f2a27;
-  --c-result: #fbbf24; --c-result-bg: #2b2113;
   --shadow-card: none;
   color-scheme: dark;
 }

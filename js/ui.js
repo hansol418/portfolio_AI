@@ -1,11 +1,9 @@
-// 공통 동작: 이스케이프, 테마, 복사, 진행 막대·목차, 라이트박스, 숫자 효과
+// 공통 동작: 이스케이프, 테마, 복사, 진행 막대, 목차, 라이트박스, 숫자 효과
 window.UI = (() => {
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const esc = (value) => String(value ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-  const badgeClass = { "확인함": "badge--ok", "조건부": "badge--cond", "팀": "badge--team" };
-  const badge = (name) => `<span class="badge ${badgeClass[name] || ""}">${esc(name)}</span>`;
 
   function initTheme() {
     const root = document.documentElement;
@@ -71,7 +69,7 @@ window.UI = (() => {
     const s = lightbox.list[lightbox.index];
     $("#lb-img").src = s.src;
     $("#lb-img").alt = s.alt;
-    $("#lb-cap").textContent = `${lightbox.index + 1} / ${lightbox.list.length} · ${s.caption || s.alt}`;
+    $("#lb-cap").textContent = `${lightbox.index + 1} / ${lightbox.list.length} — ${s.caption || s.alt}`;
     if (!dialog.open) dialog.showModal();
   }
   function openLightbox(list, i) { lightbox.list = list; showShot(i); }
@@ -120,5 +118,5 @@ window.UI = (() => {
   }
 
   function initAll() { initTheme(); initProgress(); initLightbox(); }
-  return { $, $$, esc, badge, copyText, flash, openLightbox, countUp, initAll };
+  return { $, $$, esc, copyText, flash, openLightbox, countUp, initAll };
 })();
