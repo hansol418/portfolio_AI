@@ -11,7 +11,7 @@
 
 .d-sec { padding-top: var(--s-12); }
 .d-sec > h2 { font-size: var(--fs-h2); margin: 0 0 var(--s-4); }
-.d-sec > h2::before { counter-increment: dsec; content: counter(dsec, decimal-leading-zero); display: block; font: 500 var(--fs-13)/1.4 var(--f-mono); color: var(--c-accent); letter-spacing: 0.02em; margin-bottom: var(--s-2); }
+.d-sec > h2::before { counter-increment: dsec; content: counter(dsec, decimal-leading-zero); display: block; font: 500 var(--fs-13)/1.4 var(--f-sans); color: var(--c-accent); letter-spacing: 0.02em; margin-bottom: var(--s-2); }
 .d-sec > h2 .label { display: inline; margin-left: 6px; font-size: var(--fs-18); color: var(--c-faint); }
 .d-text { font-size: var(--fs-18); }
 .plain { margin: 0; padding-left: 1.1em; }
@@ -36,7 +36,7 @@
 
 /* 문제 해결: 장마다 왼쪽 번호, 오른쪽 제목과 단계 */
 .d-ch { display: grid; grid-template-columns: 9rem 1fr; gap: var(--s-3); padding: var(--s-4); margin-bottom: var(--s-3); }
-.d-ch > .label { margin: 4px 0 0; font-family: var(--f-mono); color: var(--c-accent); }
+.d-ch > .label { margin: 4px 0 0; font-family: var(--f-sans); color: var(--c-accent); }
 .d-ch h3 { font-size: var(--fs-24); margin-bottom: var(--s-2); }
 .d-steps { margin: 0; }
 .d-steps div { display: grid; grid-template-columns: 6rem 1fr; gap: var(--s-2); padding: var(--s-1) 0; border-bottom: 1px solid var(--c-line); }
@@ -73,7 +73,7 @@
 .flow__row { list-style: none; margin: var(--s-2) 0; padding: var(--s-3) 0; display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); column-gap: var(--s-5); border-block: 1px solid var(--c-line); }
 .flow__step { position: relative; display: flex; flex-direction: column; gap: 2px; font-size: var(--fs-14); line-height: 1.5; color: var(--c-muted); }
 .flow__step b { font-size: var(--fs-16); color: var(--c-ink); line-height: 1.4; }
-.flow__no { margin-right: 6px; font: 500 var(--fs-13) var(--f-mono); color: var(--c-accent); }
+.flow__no { margin-right: 6px; font: 500 var(--fs-13) var(--f-sans); color: var(--c-accent); }
 .flow__who { font-size: 12px; font-weight: 700; }
 .flow__who--human { color: var(--c-human); } .flow__who--ai { color: var(--c-ai); } .flow__who--sys { color: var(--c-sys); }
 .flow__step + .flow__step::before { content: "→"; position: absolute; left: -27px; top: 0; color: var(--c-muted); }

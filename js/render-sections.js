@@ -18,7 +18,7 @@ window.Sections = (() => {
   }
 
   const rows = (list, dateKey) => list.map((x) => `<li><span class="label">${esc(x[dateKey])}</span>
-    <span>${esc(x.name)}${x.desc ? `<span class="muted">, ${esc(x.desc)}</span>` : ""}</span></li>`).join("");
+    <span>${esc(x.name)}${x.org ? `<span class="rows__org">(${esc(x.org)})</span>` : ""}${x.desc ? `<span class="muted">, ${esc(x.desc)}</span>` : ""}</span></li>`).join("");
 
   function recordsHTML(r) {
     return `<header class="sec-head"><div><p class="eyebrow">05 / Record</p>

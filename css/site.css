@@ -2,6 +2,7 @@
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 80px; }
 body { margin: 0; background: var(--c-bg); color: var(--c-text); font: 400 var(--fs-16)/1.7 var(--f-sans); word-break: keep-all; overflow-wrap: anywhere; -webkit-font-smoothing: antialiased; }
+button, input, select, textarea { font: inherit; }
 img { max-width: 100%; height: auto; display: block; }
 a { color: inherit; text-underline-offset: 3px; }
 a:hover { color: var(--c-accent); }
@@ -21,7 +22,7 @@ ul, ol { padding-left: 1.2em; }
 .wrap { max-width: calc(var(--w-page) + 2 * var(--s-3)); margin: 0 auto; padding: 0 var(--s-3); }
 .section { padding-block: var(--s-section) 0; }
 .label { font: 500 var(--fs-14)/1.4 var(--f-sans); color: var(--c-faint); margin: 0 0 var(--s-1); }
-.eyebrow { font: 500 var(--fs-13)/1.4 var(--f-mono); color: var(--c-accent); margin: 0 0 var(--s-2); letter-spacing: 0.02em; }
+.eyebrow { font: 500 var(--fs-13)/1.4 var(--f-sans); color: var(--c-accent); margin: 0 0 var(--s-2); letter-spacing: 0.02em; }
 .lead { font-size: var(--fs-16); color: var(--c-muted); max-width: var(--w-read); }
 .muted { color: var(--c-muted); }
 .sub { font-size: var(--fs-18); margin: var(--s-8) 0 var(--s-3); }
@@ -117,7 +118,7 @@ ul, ol { padding-left: 1.2em; }
 /* 일하는 방식 · 성장 · 기록 */
 .steps { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s-2); }
 .steps li { padding: var(--s-3); display: flex; flex-direction: column; gap: 4px; }
-.step__n { font: 500 var(--fs-13) var(--f-mono); color: var(--c-accent); }
+.step__n { font: 500 var(--fs-13) var(--f-sans); color: var(--c-accent); }
 .timeline { list-style: none; padding: 0; margin: 0; border-left: 2px solid var(--c-line); }
 .timeline li { padding: 0 0 var(--s-4) var(--s-4); position: relative; }
 .timeline li::before { content: ""; position: absolute; left: -7px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--c-surface); border: 2px solid var(--c-accent); }
@@ -128,6 +129,8 @@ ul, ol { padding-left: 1.2em; }
 .records .sub { margin-top: 0; }
 .records .sub ~ .sub { margin-top: var(--s-4); }
 .rows { list-style: none; padding: 0; margin: 0; }
+/* 교육 기관 이름은 과정 이름 아래 줄에 둔다 */
+.rows__org { display: block; color: var(--c-muted); }
 .rows li { display: grid; grid-template-columns: 8rem 1fr; gap: var(--s-2); padding: var(--s-1) 0; border-bottom: 1px solid var(--c-line); align-items: baseline; }
 .rows li:last-child, .skills div:last-child { border-bottom: 0; }
 .skills { margin: 0; }

@@ -82,10 +82,10 @@ window.PORTFOLIO.story = [
 window.PORTFOLIO.records = {
   career: [{ period: "2026.04 – 2026.07", name: "효성전기 DAX실", desc: "AX 과제 발굴, PoC 제작, 생성형 AI 도입 검토, 사내 경진대회 시스템 개발, 운영" }],
   education: [
-    { period: "2026.08 – 2026.11", name: "LS JUMP-UP 부트캠프 (LS그룹, K-뉴딜 아카데미)" },
+    { period: "2026.08 – 2026.11", name: "LS JUMP-UP 부트캠프", org: "LS그룹, K-뉴딜 아카데미" },
     { period: "2025.03 – 2026.02", name: "한국폴리텍대학 소프트웨어융합과 인공지능소프트웨어직종 하이테크과정 수료" },
-    { period: "2025.09 – 2025.11", name: "LangChain과 멀티 에이전트를 활용한 AI 서비스 배포 (수도권 ICT 이노베이션스퀘어)" },
-    { period: "2024.03 – 2024.09", name: "AI 기반 스마트 제조공정 빅데이터 분석 시스템개발 (부산인재개발원 부산IT교육센터)" },
+    { period: "2025.09 – 2025.11", name: "LangChain과 멀티 에이전트를 활용한 AI 서비스 배포", org: "수도권 ICT 이노베이션스퀘어" },
+    { period: "2024.03 – 2024.09", name: "AI 기반 스마트 제조공정 빅데이터 분석 시스템개발", org: "부산인재개발원 부산IT교육센터" },
     { period: "2016.03 – 2020.02", name: "동의과학대학교 기계공학과 졸업" },
   ],
   certs: [
@@ -94,7 +94,7 @@ window.PORTFOLIO.records = {
     { date: "2025.07", name: "정보처리기능사" }, { date: "2025.04", name: "데이터분석 준전문가 (ADsP)" },
     { date: "2025.04", name: "SQL 개발자 (SQLD)" },
   ],
-  awards: [{ date: "2019.11", name: "캡스톤 디자인 경진대회 은상", desc: "Arduino 드론으로 오일펜스를 투하하는 프로젝트, 팀장, PID 제어 코딩" }],
+  awards: [{ date: "2019.11", name: "캡스톤 디자인 경진대회 은상 (Oil Fence Drone)" }],
   skills: [
     { group: "AI, LLM", items: ["Python", "PyTorch", "LangGraph", "LangChain", "RAG", "ReAct", "Claude API", "HuggingFace Transformers"] },
     { group: "데이터", items: ["Pandas", "scikit-learn", "XGBoost, LightGBM", "LSTM, TCN", "Dash, Plotly"] },

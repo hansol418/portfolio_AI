@@ -22,7 +22,6 @@
   /* 제목도 본문과 같은 Pretendard. 이름만 남겨 기존 규칙이 그대로 쓰게 한다. */
   --f-serif: var(--f-sans);
   /* 섹션 번호 같은 영문·숫자 라벨에만 쓴다. 한글은 Pretendard로 떨어진다. */
-  --f-mono: "JetBrains Mono", "Pretendard Variable", Pretendard, monospace;
 
   /* 크기는 다섯 단계로: 첫 화면 / 섹션 제목 / 프로젝트 이름 / 본문 / 라벨 */
   --fs-hero: clamp(2.4rem, 1.4rem + 3.6vw, 4.2rem);

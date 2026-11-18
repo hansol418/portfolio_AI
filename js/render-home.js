@@ -114,10 +114,6 @@
 
   function bindEvents() {
     $("#roles").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) setRole(b.dataset.role, true); });
-    $("#role-copy").addEventListener("click", async () => {
-      const link = roleLink(currentRole);
-      flash($("#copy-flash"), (await copyText(link)) ? "링크를 복사했습니다" : `복사가 막혀 있습니다: ${link}`);
-    });
     document.addEventListener("click", async (e) => {
       if (e.target.closest("[data-open-pdf]")) $("#pdf-dialog").showModal();
       const copyBtn = e.target.closest("[data-copy]");

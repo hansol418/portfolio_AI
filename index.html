@@ -16,13 +16,10 @@
       document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
     })();
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&display=swap">
-  <link rel="stylesheet" href="css/tokens.css?v=20261118n">
-  <link rel="stylesheet" href="css/site.css?v=20261118n">
-  <link rel="stylesheet" href="css/print.css?v=20261118n">
+  <link rel="stylesheet" href="css/tokens.css?v=20261118r">
+  <link rel="stylesheet" href="css/site.css?v=20261118r">
+  <link rel="stylesheet" href="css/print.css?v=20261118r">
 </head>
 <body>
   <a class="skip" href="#main">본문으로 건너뛰기</a>
@@ -42,7 +39,7 @@
         </ul>
       </nav>
       <div class="nav__tools">
-        <button type="button" class="btn btn--ghost" data-open-pdf>PDF</button>
+        <button type="button" class="btn btn--ghost" data-open-pdf>PDF 받기</button>
         <button type="button" class="btn btn--ghost" data-theme-toggle aria-pressed="false">다크 모드</button>
       </div>
     </div>
@@ -54,8 +51,6 @@
       <div class="roles" role="group" aria-label="어떤 직무로 보시나요?">
         <p class="label">어떤 직무로 보시나요?</p>
         <div class="roles__buttons" id="roles"></div>
-        <button type="button" class="btn btn--link" id="role-copy">이 관점 링크 복사</button>
-        <span class="flash" id="copy-flash" role="status" aria-live="polite"></span>
       </div>
       <div class="hero__grid">
         <div>
@@ -65,9 +60,8 @@
           <p class="hero__intro" id="hero-intro"></p>
           <ul class="hero__proof" id="hero-proof"></ul>
           <p class="hero__actions">
-            <a class="btn" href="#projects">프로젝트 보기</a>
             <a class="btn btn--ghost" id="hero-onepager" href="pdf/onepager-all.pdf" download>원페이저 PDF</a>
-            <button type="button" class="btn btn--ghost" data-open-pdf>PDF 모두 보기</button>
+            <button type="button" class="btn btn--ghost" data-open-pdf>PDF 받기</button>
           </p>
         </div>
         <img class="hero__photo" src="assets/photo.jpg" alt="이한솔 증명사진" width="240" height="300">
@@ -114,7 +108,7 @@
           <li><span class="label">이메일</span> <a href="mailto:hslee4954@gmail.com">hslee4954@gmail.com</a></li>
           <li><span class="label">GitHub</span> <a href="https://github.com/hansol418">github.com/hansol418</a></li>
         </ul>
-        <button type="button" class="btn btn--invert" data-open-pdf>직무별 PDF 받기</button>
+        <button type="button" class="btn btn--invert" data-open-pdf>PDF 받기</button>
       </div>
     </section>
   </main>
@@ -127,13 +121,13 @@
   </dialog>
   <dialog class="pdf-dialog" id="pdf-dialog" aria-labelledby="pdf-title"></dialog>
 
-  <script src="data/site.js?v=20261118n"></script>
-  <script src="data/projects-company.js?v=20261118n"></script>
-  <script src="data/projects-ls.js?v=20261118n"></script>
-  <script src="data/projects-more.js?v=20261118n"></script>
-  <script src="data/sections.js?v=20261118n"></script>
-  <script src="js/ui.js?v=20261118n"></script>
-  <script src="js/render-sections.js?v=20261118n"></script>
-  <script src="js/render-home.js?v=20261118n"></script>
+  <script src="data/site.js?v=20261118r"></script>
+  <script src="data/projects-company.js?v=20261118r"></script>
+  <script src="data/projects-ls.js?v=20261118r"></script>
+  <script src="data/projects-more.js?v=20261118r"></script>
+  <script src="data/sections.js?v=20261118r"></script>
+  <script src="js/ui.js?v=20261118r"></script>
+  <script src="js/render-sections.js?v=20261118r"></script>
+  <script src="js/render-home.js?v=20261118r"></script>
 </body>
 </html>
